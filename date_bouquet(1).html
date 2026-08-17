@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khana Sangai Khanu Hola? ❤️</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh; overflow:hidden; font-family:'Noto Sans Devanagari','Nirmala UI',Georgia,serif;
+  background:radial-gradient(circle at 50% 20%,#fff7fa 0,#ffe7ef 35%,#f7c5d5 100%);
+  color:#5b2638;
+}
+.screen{
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  padding:24px; position:relative;
+}
+.card{
+  width:min(520px,94vw); text-align:center; padding:42px 28px;
+  background:rgba(255,255,255,.72); backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.8); border-radius:30px;
+  box-shadow:0 25px 70px rgba(110,35,65,.18); z-index:3;
+}
+.heart{font-size:58px; animation:pulse 1.4s infinite}
+h1{font-size:clamp(30px,7vw,48px); margin:12px 0;color:#8f294d}
+p{font-size:18px; line-height:1.6;margin:12px 0}
+.buttons{display:flex;gap:15px;justify-content:center;align-items:center;margin-top:28px;min-height:62px}
+button{
+  border:0;border-radius:999px;padding:15px 28px;font-size:17px;font-weight:bold;
+  cursor:pointer;transition:.25s;box-shadow:0 8px 20px rgba(100,20,50,.15)
+}
+#yes{background:#b82e5a;color:white}
+#yes:hover{transform:scale(1.08)}
+#no{background:#fff;color:#8f294d;position:relative}
+.hidden{display:none!important}
+
+/* Floating petals */
+.petal{position:fixed;top:-30px;font-size:20px;opacity:.7;animation:fall linear forwards;pointer-events:none;z-index:1}
+@keyframes fall{to{transform:translate3d(var(--drift),110vh,0) rotate(540deg);opacity:0}}
+@keyframes pulse{50%{transform:scale(1.12)}}
+
+/* Bouquet */
+#bouquetScreen{overflow:auto}
+.bouquet-wrap{position:relative;width:min(520px,95vw);height:570px}
+.message{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:100%;text-align:center;z-index:5
+}
+.message h2{font-size:clamp(28px,7vw,43px);color:#8f294d}
+.message p{font-style:italic}
+.bouquet{
+  position:absolute;left:50%;bottom:18px;transform:translateX(-50%);
+  width:360px;height:430px;
+}
+.paper{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:280px;height:240px;
+  background:linear-gradient(145deg,#fff9fc,#f5d9e5);
+  clip-path:polygon(10% 0,90% 0,100% 100%,50% 82%,0 100%);
+  filter:drop-shadow(0 15px 14px rgba(80,20,45,.18));
+}
+.ribbon{
+  position:absolute;bottom:68px;left:50%;transform:translateX(-50%);
+  width:70px;height:38px;background:#a5224e;border-radius:6px;z-index:6
+}
+.ribbon:before,.ribbon:after{
+  content:"";position:absolute;top:20px;width:58px;height:38px;background:#8f1c45
+}
+.ribbon:before{right:55px;transform:rotate(25deg);border-radius:5px 20px}
+.ribbon:after{left:55px;transform:rotate(-25deg);border-radius:20px 5px}
+
+.stem{position:absolute;width:8px;height:250px;background:#477044;left:50%;bottom:115px;transform-origin:bottom;border-radius:10px;z-index:1}
+.stem:nth-child(2){transform:translateX(-50%) rotate(-25deg)}
+.stem:nth-child(3){transform:translateX(-50%) rotate(22deg)}
+.stem:nth-child(4){transform:translateX(-50%) rotate(-8deg)}
+.leaf{
+  position:absolute;width:62px;height:28px;background:#477044;border-radius:100% 0;
+  z-index:2
+}
+.flower{
+  position:absolute;width:100px;height:100px;z-index:4;
+  transform-origin:center bottom;animation:sway 3s ease-in-out infinite
+}
+.flower .center{position:absolute;width:28px;height:28px;background:#f6b82e;border-radius:50%;left:36px;top:36px;z-index:3}
+.flower .p{
+  position:absolute;width:48px;height:48px;background:#d93464;border-radius:50% 50% 45% 45%;
+}
+.p1{left:25px;top:0}.p2{left:50px;top:25px}.p3{left:25px;top:50px}
+.p4{left:0;top:25px}
+.flower2 .p{background:#e9577c}
+.flower3 .p{background:#c72557}
+.flower4 .p{background:#f27c9a}
+@keyframes sway{50%{transform:rotate(3deg) translateY(-3px)}}
+
+.f1{left:55px;top:105px}.f2{left:145px;top:65px;transform:scale(1.12)}
+.f3{left:205px;top:125px;transform:scale(.9)}.f4{left:120px;top:155px;transform:scale(.82)}
+.f5{left:10px;top:165px;transform:scale(.75)}.f6{left:255px;top:175px;transform:scale(.7)}
+
+.signature{margin-top:10px;font-size:20px;color:#8f294d}
+.sparkle{position:fixed;pointer-events:none;font-size:22px;animation:spark 1s forwards;z-index:10}
+@keyframes spark{to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}}
+.confetti{position:fixed;top:-20px;font-size:22px;animation:confetti 3s linear forwards;z-index:9}
+@keyframes confetti{to{transform:translateY(110vh) rotate(720deg)}}
+</style>
+</head>
+<body>
+
+<section class="screen" id="questionScreen">
+  <div class="card">
+    <div class="heart">❤️</div>
+    <h1>एउटा सानो कुरा... ❤️</h1>
+    <p>आज lunch संगै खाऊँ न? 🥺</p>
+    <p><strong>यतै खाना खानु होला हुन्छ? 🌹</strong></p>
+    <div class="buttons">
+      <button id="yes">हुन्छ ❤️</button>
+      <button id="no">हुँदैन 🙈</button>
+    </div>
+    <p style="font-size:13px;opacity:.65;margin-top:24px">राम्ररी सोचेर भन्नु होला है... 😉</p>
+  </div>
+</section>
+
+<section class="screen hidden" id="bouquetScreen">
+  <div class="bouquet-wrap">
+    <div class="message">
+      <h2>हुन्छ भन्नुभयो! ❤️</h2>
+      <p>त्यसो भए यो bouquet तपाईंकै लागि हो। 🌹</p>
+    </div>
+
+    <div class="bouquet">
+      <div class="stem"></div><div class="stem"></div><div class="stem"></div>
+
+      <div class="flower f1 flower1"><i class="p p1"></i><i class="p p2"></i><i class="p p3"></i><i class="p p4"></i><i class="center"></i></div>
+      <div class="flower f2 flower2"><i class="p p1"></i><i class="p p2"></i><i class="p p3"></i><i class="p p4"></i><i class="center"></i></div>
+      <div class="flower f3 flower3"><i class="p p1"></i><i class="p p2"></i><i class="p p3"></i><i class="p p4"></i><i class="center"></i></div>
+      <div class="flower f4 flower4"><i class="p p1"></i><i class="p p2"></i><i class="p p3"></i><i class="p p4"></i><i class="center"></i></div>
+      <div class="flower f5 flower2"><i class="p p1"></i><i class="p p2"></i><i class="p p3"></i><i class="p p4"></i><i class="center"></i></div>
+      <div class="flower f6 flower1"><i class="p p1"></i><i class="p p2"></i><i class="p p3"></i><i class="p p4"></i><i class="center"></i></div>
+
+      <div class="paper"></div>
+      <div class="ribbon"></div>
+    </div>
+    <div class="signature">तपाईंको लागि सानो bouquet. 💕</div>
+  </div>
+</section>
+
+<script>
+const yes=document.getElementById("yes");
+const no=document.getElementById("no");
+const question=document.getElementById("questionScreen");
+const bouquet=document.getElementById("bouquetScreen");
+
+function petal(){
+  const e=document.createElement("div");
+  e.className="petal";
+  e.textContent=["🌸","🌹","💕","✨"][Math.floor(Math.random()*4)];
+  e.style.left=Math.random()*100+"vw";
+  e.style.setProperty("--drift",(Math.random()*180-90)+"px");
+  e.style.animationDuration=(4+Math.random()*4)+"s";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),9000);
+}
+setInterval(petal,500);
+
+function celebrate(){
+  question.classList.add("hidden");
+  bouquet.classList.remove("hidden");
+  for(let i=0;i<55;i++){
+    setTimeout(()=>{
+      const e=document.createElement("div");
+      e.className="confetti";
+      e.textContent=["❤️","🌹","💕","✨","🌸"][Math.floor(Math.random()*5)];
+      e.style.left=Math.random()*100+"vw";
+      e.style.animationDuration=(2+Math.random()*2)+"s";
+      document.body.appendChild(e);
+      setTimeout(()=>e.remove(),4500);
+    },i*35);
+  }
+}
+
+yes.addEventListener("click",celebrate);
+
+function moveNo(){
+  const maxX=Math.min(140,window.innerWidth/2-80);
+  const maxY=100;
+  no.style.transform=`translate(${(Math.random()*2-1)*maxX}px,${(Math.random()*2-1)*maxY}px)`;
+}
+no.addEventListener("mouseenter",moveNo);
+no.addEventListener("touchstart",(e)=>{e.preventDefault();moveNo()});
+
+document.addEventListener("click",(e)=>{
+  if(e.target.id==="yes"){
+    for(let i=0;i<18;i++){
+      const s=document.createElement("div");
+      s.className="sparkle";s.textContent="✨";
+      s.style.left=e.clientX+"px";s.style.top=e.clientY+"px";
+      s.style.setProperty("--x",(Math.random()*240-120)+"px");
+      s.style.setProperty("--y",(Math.random()*240-120)+"px");
+      document.body.appendChild(s);setTimeout(()=>s.remove(),1000);
+    }
+  }
+});
+</script>
+</body>
+</html>
